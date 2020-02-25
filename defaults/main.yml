@@ -1,0 +1,6 @@
+---
+brave_dependencies: ['apt-transport-https', 'curl']
+brave_packages: ['brave-browser']
+brave_repo_key: 'https://brave-browser-apt-release.s3.brave.com/brave-core.asc'
+brave_repo_path: 'deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main'
+...
