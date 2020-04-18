@@ -17,7 +17,7 @@
   tags:
   - ct-brave
 
-- name: 'add Envoy repository to APT'
+- name: 'add Brave repository to APT'
   apt_repository:
     repo: '{{brave_repo_path}}'
     state: present
