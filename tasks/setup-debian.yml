@@ -1,39 +1,38 @@
 ---
+# --------------------------------
 
-- name: 'install some packages so we can install the repo key'
-  apt:
-    name: '{{brave_dependencies}}'
+- name: "Install some packages so we can install the repo key"
+  ansible.builtin.apt:
+    name: "{{ brave_dependencies }}"
     state: present
   become: true
-  tags:
-  - ct-brave
+  tags: [ct-brave]
 
-- name: 'add Brave repo key'
-  apt_key:
-    url: '{{brave_repo_key}}'
+- name: "Add Brave repo key"
+  ansible.builtin.apt_key:
+    state: present
+    url: "{{ brave_repo_key }}"
     validate_certs: true
-    state: present
   become: true
-  tags:
-  - ct-brave
+  tags: [ct-brave]
 
-- name: 'add Brave repository to APT'
-  apt_repository:
-    repo: '{{brave_repo_path}}'
+- name: "Add Brave repository to APT"
+  ansible.builtin.apt_repository:
+    filename: "brave-browser-release.list"
+    repo: "{{ brave_repo_path }}"
     state: present
     update_cache: true
-    filename: 'brave-browser-release.list'
   register: reg_brave_repo
   become: true
-  tags:
-  - ct-brave
+  tags: [ct-brave]
 
-- name: 'update APT cache and install Brave'
-  apt:
-    name: '{{brave_packages}}'
-    update_cache: '{{reg_brave_repo is changed}}'
+- name: "Update APT cache and install Brave"
+  ansible.builtin.apt:
+    name: "{{ brave_packages }}"
+    update_cache: "{{ reg_brave_repo is changed }}"
     state: present
   become: true
-  tags:
-  - ct-brave
+  tags: [ct-brave]
+
+# --------------------------------
 ...

@@ -1,22 +1,19 @@
 ---
 # --------------------------------
 
-- name: 'include common pre-tasks'
-  include_tasks: common-pre.yml
-  tags:
-  - ct-envoy
+- name: "Include common pre-tasks"
+  ansible.builtin.include_tasks: common-pre.yml
+  tags: [ct-brave]
 
-- name: 'include {{ct_family}} tasks'
-  include_tasks: setup-{{ct_family}}.yml
+- name: "Include {{ ct_family }} tasks"
+  ansible.builtin.include_tasks: setup-{{ ct_family }}.yml
   when:
-  - ct_family == 'debian' or ct_family == 'redhat'
-  tags:
-  - ct-envoy
+  - ct_family == "debian" or ct_family == "redhat"
+  tags: [ct-brave]
 
-- name: 'include comon post-tasks'
-  include_tasks: common-post.yml
-  tags:
-  - ct-envoy
+- name: "Include comon post-tasks"
+  ansible.builtin.include_tasks: common-post.yml
+  tags: [ct-brave]
 
 # --------------------------------
 ...
